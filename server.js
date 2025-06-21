@@ -15,6 +15,8 @@ const app = express();
 app.use("/assets", express.static("dist/assets"));
 
 app.get("/", (req, res) => {
+  console.log(`[${new Date().toISOString()}] - GET /`);
+
   const [beforeReactAppHtmlString, afterReactAppHtmlString] =
     clientShell.split("<!--ROOT-->");
   res.write(beforeReactAppHtmlString);
@@ -24,7 +26,7 @@ app.get("/", (req, res) => {
   res.end();
 });
 
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () =>
   console.log(`Server started at http://localhost:${PORT}/`)
 );
