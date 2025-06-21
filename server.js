@@ -12,7 +12,6 @@ const clientShell = fs.readFileSync(
 );
 
 const app = express();
-app.use("/assets", express.static("dist/assets"));
 
 app.get("/", (req, res) => {
   console.log(`[${new Date().toISOString()}] - GET /`);
@@ -25,6 +24,8 @@ app.get("/", (req, res) => {
   res.write(afterReactAppHtmlString);
   res.end();
 });
+
+app.use("/assets", express.static("dist/assets"));
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () =>
