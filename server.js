@@ -9,10 +9,15 @@ import express from "express";
 
 dotenv.config();
 
+console.log("DEBUG -", path.resolve(import.meta.dirname, "dist/index.html"));
+console.log("DEBUG -", import.meta.dirname);
+
 const clientShell = fs.readFileSync(
   path.resolve(import.meta.dirname, "dist/index.html"),
   "utf-8"
 );
+
+console.log("DEBUG -", clientShell);
 
 const app = express();
 
