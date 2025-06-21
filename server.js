@@ -4,7 +4,10 @@ import App from "./App.js";
 
 import fs from "node:fs";
 import path from "node:path";
+import dotenv from "dotenv";
 import express from "express";
+
+dotenv.config();
 
 const clientShell = fs.readFileSync(
   path.resolve(import.meta.dirname, "dist/index.html"),
@@ -14,7 +17,7 @@ const clientShell = fs.readFileSync(
 const app = express();
 
 app.get("/", (req, res) => {
-  console.log(`[${new Date().toISOString()}] - GET /`);
+  console.log(`SERVER_LOGGER: [${new Date().toISOString()}] - GET /`);
 
   const [beforeReactAppHtmlString, afterReactAppHtmlString] =
     clientShell.split("<!--ROOT-->");
@@ -29,5 +32,5 @@ app.use("/assets", express.static("dist/assets"));
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () =>
-  console.log(`Server started at http://localhost:${PORT}/`)
+  console.log(`SERVER_LOGGER: Server started at http://localhost:${PORT}/`)
 );
